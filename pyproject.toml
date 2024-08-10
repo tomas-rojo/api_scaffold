@@ -35,6 +35,5 @@ branch = true
 exclude_lines = [
     "pragma: no cover",
     "@(abc\\.)?abstractmethod",
-    "@unittest\\.skip",
     "raise NotImplementedError",
 ]
