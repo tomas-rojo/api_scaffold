@@ -1,0 +1,40 @@
+[tool.ruff]
+# Set the maximum line length to 120.
+line-length = 120
+include = ["pyproject.toml", "src/**/*.py"]
+
+[tool.isort]
+profile = "ruff"
+src_paths = ["src/", "tests/"]
+line_length = 120
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+check_untyped_defs = true
+warn_unused_configs = true
+ignore_missing_imports = true
+warn_unused_ignores = false
+
+[tool.ruff.lint]
+select = ["B","C","E","F","W","T","B9"]
+ignore = ["E203", "E501"]
+exclude = ["tests/"]
+
+[tool.pytest.ini_options]
+testpaths = [ "tests/" ]
+pythonpath = "src/"
+addopts = "--tb=short -q"
+
+[tool.coverage.run]
+relative_files = true
+source = [ "src/" ]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "@(abc\\.)?abstractmethod",
+    "@unittest\\.skip",
+    "raise NotImplementedError",
+]

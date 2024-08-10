@@ -1,0 +1,10 @@
+__pycache__
+.coverage
+.idea/
+venv/
+.DS_Store
+coverage.xml
+**/*.egg-info
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/

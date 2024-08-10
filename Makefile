@@ -1,0 +1,31 @@
+test:
+	@coverage run -m pytest tests/unit/
+	@coverage xml
+	@coverage report --show-missing --skip-covered
+
+itest:
+	coverage run -m pytest tests/integration/
+	coverage xml
+	coverage report --show-missing --skip-covered
+
+alltests:
+	coverage run -m pytest -s tests/unit tests/integration
+	coverage xml
+	coverage report --show-missing --skip-covered
+
+checks: format sort
+
+format:
+	@ruff format
+
+sort:
+	@ruff check --select I --fix .
+
+mypy:
+	mypy src/ tests/
+
+run:
+	@export APP_ENVIRONMENT=unit-test && bin/testctl run
+
+config:
+	@export APP_ENVIRONMENT=unit-test && bin/testctl config
