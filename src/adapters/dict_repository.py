@@ -1,3 +1,4 @@
+from exceptions.item_not_found import ItemNotFound
 from ports.abstract_repository import AbstractRepository
 
 
@@ -9,4 +10,7 @@ class DictRepository(AbstractRepository):
         self._collection[id] = id
 
     def get(self, id: str) -> str:
-        return self._collection[id]
+        try:
+            return self._collection[id]
+        except KeyError as e:
+            raise ItemNotFound(id) from e

@@ -13,8 +13,8 @@ TUseCaseResult = TypeVar("TUseCaseResult")
 class AbstractUseCase(ABC, Generic[TUseCaseResult]):
     _executed: bool = field(default=False, init=False)
 
-    def __post_init__(self):
-        self.log = logging.getLogger(__class__.__name__)
+    def __post_init__(self) -> None:
+        self.log = logging.getLogger(self.__class__.__name__)
 
     def execute(self) -> TUseCaseResult:
         if self._executed:
