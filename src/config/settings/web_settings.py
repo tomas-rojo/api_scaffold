@@ -6,8 +6,10 @@ class WebSettings(BaseModel):
     port: int = 5005
     debug: bool = False
 
+
 class FlaskSettings(WebSettings):
     pass
+
 
 class FastAPISettings(WebSettings):
     pass
