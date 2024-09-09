@@ -1,4 +1,4 @@
-from services.get import get_element
+from services.query.get import get_element
 
 
 class IndexUseCase:

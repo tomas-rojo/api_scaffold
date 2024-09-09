@@ -1,5 +1,5 @@
-from services.add import add_element
-from services.get import get_element
+from services.command.add import add_element
+from services.query.get import get_element
 
 
 def test_service_can_get_element() -> None:

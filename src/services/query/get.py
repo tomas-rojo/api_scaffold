@@ -1,9 +1,7 @@
 from config.container import container
 from ports.abstract_repository import AbstractRepository
-from pytest import fixture
 
 
-@fixture
-def repository() -> AbstractRepository:
+def get_element(id: str) -> str:
     repository: AbstractRepository = container.repository
-    return repository
+    return repository.get(id)

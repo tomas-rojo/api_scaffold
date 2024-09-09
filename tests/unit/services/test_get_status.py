@@ -1,4 +1,4 @@
-from services.get_status import get_status
+from services.query.get_status import get_status
 
 
 def test_status() -> None:

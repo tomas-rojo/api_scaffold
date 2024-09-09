@@ -24,8 +24,11 @@ sort:
 mypy:
 	mypy src/ tests/
 
-run:
+run2:
 	@export APP_ENVIRONMENT=unit-test && bin/testctl run
 
 config:
 	@export APP_ENVIRONMENT=unit-test && bin/testctl config
+
+run:
+	@bin/run run

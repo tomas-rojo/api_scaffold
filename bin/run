@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+
+# The Docker image that is built by this script.
+# This image will only be built locally. It is not pushed to
+# the central image registry.
+export LOCAL_IMAGE=api
+
+# The environment to use.
+export APP_ENVIRONMENT=integration
+
+docker run --rm -ti \
+    -e APP_ENVIRONMENT="$APP_ENVIRONMENT" \
+    -p 5005:5005 \
+    "$LOCAL_IMAGE" \
+    "$@"
