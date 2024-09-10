@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
+BASE_DIR=$(realpath "$SCRIPT_DIR/..")
+
+cd "$BASE_DIR" || exit 1
+
+echo "Make sure target database is up to date"
+alembic -n user upgrade head
+
+echo "Checking if the ORM models have changed"
+if alembic -n user check > /dev/null 2>&1; then
+    echo "No changes found"
+    exit
+fi
+
+echo "Changes found, generating new migrations"
+alembic -n user revision --autogenerate

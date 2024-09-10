@@ -25,10 +25,13 @@ mypy:
 	mypy src/ tests/
 
 run2:
-	@export APP_ENVIRONMENT=unit-test && bin/testctl run
+	@export APP_ENVIRONMENT=development && bin/testctl run
 
 config:
-	@export APP_ENVIRONMENT=unit-test && bin/testctl config
+	@export APP_ENVIRONMENT=development && bin/testctl config
 
 run:
 	@bin/run run
+
+migrations:
+	@bin/generate_migrations

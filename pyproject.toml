@@ -15,6 +15,7 @@ check_untyped_defs = true
 warn_unused_configs = true
 ignore_missing_imports = true
 warn_unused_ignores = false
+exclude = ['migrations/versions/*']
 
 [tool.ruff.lint]
 select = ["B","C","E","F","W","T","B9"]
