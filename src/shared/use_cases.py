@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import logging
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-import logging
 from typing import Any, Generic, TypeVar
 
 TUseCaseResult = TypeVar("TUseCaseResult")
