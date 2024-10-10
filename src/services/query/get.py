@@ -1,7 +1,7 @@
-from config.container import container
+from config.dependency import Dependency
 from ports.abstract_repository import AbstractRepository
 
 
 def get_element(id: str) -> str:
-    repository: AbstractRepository = container.repository
+    repository = Dependency.get(AbstractRepository)
     return repository.get(id)

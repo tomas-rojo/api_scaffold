@@ -7,13 +7,14 @@ from config.instances.integration_test_config import IntegrationTestConfig
 from config.instances.production_config import ProductionConfig
 from config.instances.unit_test_config import UnitTestConfig
 
+from config.dependency import Dependency
+
 
 class Environment:
     environments: dict[str, Callable[[], BaseConfig]] = {
         "unit-test": UnitTestConfig,
         "integration": IntegrationTestConfig,
         "development": DevelopmentConfig,
-        "production": ProductionConfig,
     }
 
     @staticmethod
@@ -36,3 +37,7 @@ class Environment:
             return Environment.environments[environment_name]()
         except KeyError:
             raise SystemError(f"Invalid value '{environment_name}' for environment variable APP_ENVIRONMENT") from None
+
+    @staticmethod
+    def teardown() -> None:
+        Dependency.reset()
