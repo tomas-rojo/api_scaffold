@@ -1,13 +1,12 @@
 from os import environ
 from typing import Callable
 
+from config.dependency import Dependency
 from config.instances.base_config import BaseConfig
 from config.instances.development_config import DevelopmentConfig
 from config.instances.integration_test_config import IntegrationTestConfig
 from config.instances.production_config import ProductionConfig
 from config.instances.unit_test_config import UnitTestConfig
-
-from config.dependency import Dependency
 
 
 class Environment:

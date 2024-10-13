@@ -6,4 +6,4 @@ def test_index_should_return_200(client: TestClient) -> None:
     add_element("1")
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {'result': '1'}
+    assert response.json() == 'Hello from FastAPI!'

@@ -6,3 +6,5 @@ httpx==0.27.0
 alembic==1.13.2
 SQLAlchemy==2.0.34
 punq==0.7.0
+flask==3.0.3
+gunicorn==23.0.0
