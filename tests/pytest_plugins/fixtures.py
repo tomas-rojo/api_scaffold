@@ -1,9 +1,9 @@
-from config.container import container
+from config.dependency import Dependency
 from ports.abstract_repository import AbstractRepository
 from pytest import fixture
 
 
 @fixture
 def repository() -> AbstractRepository:
-    repository: AbstractRepository = container.repository
+    repository = Dependency.get(AbstractRepository)
     return repository

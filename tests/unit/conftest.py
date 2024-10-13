@@ -8,12 +8,12 @@ from web_app.api import api
 
 
 
-@fixture(autouse=True, scope="module")
+@fixture(autouse=True)
 def setup() -> Generator[None, None, None]:
     os.environ["APP_ENVIRONMENT"] = "unit-test"
     Environment.bootstrap()
     yield
-    return None
+    Environment.teardown()
 
 @fixture
 def client() -> TestClient:

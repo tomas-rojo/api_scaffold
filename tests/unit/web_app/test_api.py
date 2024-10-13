@@ -1,6 +1,9 @@
 from starlette.testclient import TestClient
 
+from services.command.add import add_element
+
 def test_index_should_return_200(client: TestClient) -> None:
+    add_element("1")
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"msg": "Hello World"}
+    assert response.json() == {'result': '1'}

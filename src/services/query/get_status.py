@@ -1,5 +1,6 @@
-from config.container import container
+from config.dependency import Dependency
 
 
 def get_status() -> str:
-    return container.api_url
+    api_url: str = Dependency.get("api_url")
+    return api_url

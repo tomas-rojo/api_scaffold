@@ -3,21 +3,19 @@ from sqlalchemy import URL, Engine, create_engine
 
 from config.instances.base_config import BaseConfig
 from config.settings.postgres_settings import PostgresSettings
+from config.dependency import Dependency
+from ports.abstract_repository import AbstractRepository
 
 
 class DevelopmentConfig(BaseConfig):
-    api_url = "integration.example.org"
-
-    def __init__(self) -> None:
-        self.repository = self.get_repository()
+    def __init__(self):
+        Dependency.add_singleton("api_url", "integration.example.org")
+        Dependency.add_singleton_factory(AbstractRepository, lambda: SQLRepository(self.engine))
 
     @property
-    def url(self) -> URL:
+    def url() -> URL:
         return PostgresSettings().get_engine_url()
 
     @property
     def engine(self) -> Engine:
         return create_engine(self.url, pool_pre_ping=True)
-
-    def get_repository(self) -> SQLRepository:
-        return SQLRepository(self.engine)
