@@ -13,7 +13,7 @@ class PostgresSettings(BaseModel):
 
     def get_engine_url(self) -> sqlalchemy.URL:
         return sqlalchemy.URL.create(
-            drivername="postgresql",
+            drivername="postgresql+psycopg2",
             username=self.username,
             password=self.password.get_secret_value(),
             host=self.host,

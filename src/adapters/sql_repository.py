@@ -30,9 +30,14 @@ class SQLRepository(AbstractRepository):
         """Creates a managed context for an auto-committing database session."""
         return self._sessionmaker.begin()
 
-    def add(self, id: str) -> None:
+    def add(self, number) -> None:
         with self.autocommit_session as session:
-            session.add(id)
+            # session.execute(
+            #     text("INSERT INTO numbers (id, num, who) VALUES (:id, :num, :who);"),
+            #     {"id": number.id, "num": number.number, "who": number.who},
+            # )
+            # session.add(id)
+            pass
 
     def get(self, id: str) -> str:
         with Session(self._engine) as session:

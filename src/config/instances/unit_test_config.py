@@ -1,8 +1,8 @@
 from adapters.dict_repository import DictRepository
-from config.instances.base_config import BaseConfig
 from ports.abstract_repository import AbstractRepository
 
 from config.dependency import Dependency
+from config.instances.base_config import BaseConfig
 
 
 class UnitTestConfig(BaseConfig):

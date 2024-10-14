@@ -3,6 +3,7 @@ from typing import Any
 
 from pydantic import BaseModel, PositiveInt
 
+
 class AbstractWebServer(ABC, BaseModel):
     host: str = "127.0.0.1"
     port: int = 5006
@@ -12,5 +13,3 @@ class AbstractWebServer(ABC, BaseModel):
     @abstractmethod
     def run(self, application: Any) -> None:
         raise NotImplementedError
-
-
