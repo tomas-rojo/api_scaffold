@@ -3,6 +3,8 @@ from random import randrange
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
+from models.user import User
+from services.command.add import add_element
 from use_cases.get_index import IndexUseCase
 
 api = FastAPI(title="Test")
@@ -11,21 +13,15 @@ api = FastAPI(title="Test")
 # @api.get("/")
 # def main() -> dict[str, str]:
 #     return {"result": IndexUseCase("1").execute()}
+
 def get_random_value() -> int:
     return randrange(1000)
 
-
-class Number(BaseModel):
-    id: uuid.UUID = Field(default_factory=uuid.uuid4)
-    number: int = Field(default_factory=get_random_value)
-    who: str
-
+def do_email() -> str:
+    return f"{get_random_value()}@gmail.com"
 
 @api.get("/")
 async def home() -> str:
-    number = Number(who="sqlalchemy")
-    # try:
-    #     await _add_number(number)
-    # except Exception as e:
-    #     return {"error": str(e)}
-    return "Hello from FastAPI!"
+    user = User(email=do_email())
+    add_element(user)
+    return "OK"    

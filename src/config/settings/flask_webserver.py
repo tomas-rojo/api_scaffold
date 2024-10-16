@@ -9,7 +9,7 @@ class FlaskWebserver(AbstractWebServer):
         application.run(
             host=self.host,
             port=self.port,
-            debug=self.debug,
+            debug=True,
         )
 
 

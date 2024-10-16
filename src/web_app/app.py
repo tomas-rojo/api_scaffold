@@ -10,4 +10,5 @@ app = Flask(__name__)
 @app.route("/")
 def home() -> Any:
     repository = Dependency.get(AbstractRepository)
+    print(repository)
     return "Hello from Flask!"

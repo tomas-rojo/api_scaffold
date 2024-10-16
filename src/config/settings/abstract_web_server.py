@@ -5,8 +5,8 @@ from pydantic import BaseModel, PositiveInt
 
 
 class AbstractWebServer(ABC, BaseModel):
-    host: str = "127.0.0.1"
-    port: int = 5006
+    host: str = "0.0.0.0"
+    port: int = 5005
     debug: bool = True
     workers: PositiveInt = 4
 

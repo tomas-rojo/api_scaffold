@@ -1,8 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+import uuid
 
 
-@dataclass(kw_only=True, slots=True, frozen=True)
+@dataclass(slots=True, frozen=True)
 class User:
-    id: str
     email: str
     is_active: bool = False
+    id: uuid.UUID = field(default_factory=uuid.uuid4)
