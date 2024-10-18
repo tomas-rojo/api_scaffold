@@ -1,9 +1,11 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 SCRIPT_DIR=$(dirname "${BASH_SOURCE[0]}")
 BASE_DIR=$(realpath "$SCRIPT_DIR/..")
 
 cd "$BASE_DIR" || exit 1
+
+export PYTHONPATH=src
 
 echo "Make sure target database is up to date"
 alembic -n user upgrade head

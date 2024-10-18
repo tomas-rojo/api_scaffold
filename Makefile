@@ -37,14 +37,14 @@ test:
 	@coverage report --show-missing --skip-covered
 
 itest:
-	coverage run -m pytest tests/integration/
-	coverage xml
-	coverage report --show-missing --skip-covered
+	@coverage run -m pytest tests/integration/
+	@coverage xml
+	@coverage report --show-missing --skip-covered
 
 alltests:
-	coverage run -m pytest -s tests/unit tests/integration
-	coverage xml
-	coverage report --show-missing --skip-covered
+	@coverage run -m pytest -s tests/unit tests/integration
+	@coverage xml
+	@coverage report --show-missing --skip-covered
 
 checks: format sort
 

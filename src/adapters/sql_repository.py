@@ -40,18 +40,14 @@ class SQLRepository(AbstractRepository):
     def autocommit_session(self) -> AbstractContextManager[Session]:
         """Creates a managed context for an auto-committing database session."""
         return self._sessionmaker.begin()
-    
+
     @property
     def no_autocommit_session(self) -> AbstractContextManager[Session]:
         return Session(self._engine)
 
     def add(self, user: User) -> None:
         with self.autocommit_session as session:
-            db_user = DbUser(
-                id=user.id,
-                email=user.email,
-                is_active=user.is_active
-            )
+            db_user = DbUser(id=user.id, email=user.email, is_active=user.is_active)
             session.add(db_user)
 
     def get(self, user_id: str) -> User:

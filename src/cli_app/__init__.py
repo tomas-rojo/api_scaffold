@@ -25,7 +25,7 @@ def cli() -> None:
 
 def web_process() -> subprocess.Popen[bytes]:
     env = dict(os.environ)
-    command = [sys.executable, "src/config/settings/fastapi_webserver.py"]
+    command = [sys.executable, "src/config/settings/flask_webserver.py"]
     return subprocess.Popen(args=command, env=env, cwd=os.getcwd())
 
 
@@ -92,5 +92,3 @@ def main() -> None:
     except Exception as e:  # noqa
         print(f"Unable to bootstrap environment: {str(e)}", file=sys.stderr)
         sys.exit(1)
-    finally:
-        Environment.teardown()

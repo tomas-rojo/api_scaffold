@@ -12,5 +12,5 @@ class FastAPIWebServer(AbstractWebServer):
         )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # noqa
     FastAPIWebServer().run("web_app.bootstrap:api")

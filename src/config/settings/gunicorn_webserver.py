@@ -1,9 +1,7 @@
 from flask import Flask
 from gunicorn.app.base import BaseApplication
-from ports.abstract_repository import AbstractRepository
 from web_app.bootstrap import app
 
-from config.dependency import Dependency
 from config.settings.abstract_web_server import AbstractWebServer
 
 
@@ -30,5 +28,5 @@ class GunicornWebServer(AbstractWebServer):
         self.FlaskApplication(application, options).run()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # noqa
     GunicornWebServer().run(app)

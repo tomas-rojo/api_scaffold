@@ -1,14 +1,13 @@
 from typing import Any
 
-from config.dependency import Dependency
 from flask import Flask
-from ports.abstract_repository import AbstractRepository
+
+from web_app.routes import users
 
 app = Flask(__name__)
+# app.register_blueprint(users.bp)
 
 
 @app.route("/")
 def home() -> Any:
-    repository = Dependency.get(AbstractRepository)
-    print(repository)
     return "Hello from Flask!"
