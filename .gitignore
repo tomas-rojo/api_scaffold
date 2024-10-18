@@ -8,4 +8,4 @@ coverage.xml
 .mypy_cache/
 .pytest_cache/
 .ruff_cache/
-versions/
+*/migrations/versions/
