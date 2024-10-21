@@ -25,7 +25,7 @@ def cli() -> None:
 
 def web_process() -> subprocess.Popen[bytes]:
     env = dict(os.environ)
-    command = [sys.executable, "src/config/settings/flask_webserver.py"]
+    command = [sys.executable, "src/config/settings/webserver/flask_webserver.py"]
     return subprocess.Popen(args=command, env=env, cwd=os.getcwd())
 
 

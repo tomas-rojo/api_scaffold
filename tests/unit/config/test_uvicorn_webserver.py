@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import uvicorn
 
-from config.settings.fastapi_webserver import FastAPIWebServer
+from config.settings.webserver.fastapi_webserver import FastAPIWebServer
 
 
 def test_on_run_gunicorn_webserver_is_started() -> None:

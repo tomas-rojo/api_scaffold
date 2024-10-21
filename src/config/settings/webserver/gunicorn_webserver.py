@@ -2,7 +2,7 @@ from flask import Flask
 from gunicorn.app.base import BaseApplication
 from web_app.bootstrap import app
 
-from config.settings.abstract_web_server import AbstractWebServer
+from config.settings.webserver.abstract_web_server import AbstractWebServer
 
 
 class GunicornWebServer(AbstractWebServer):

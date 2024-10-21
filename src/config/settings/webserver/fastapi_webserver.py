@@ -2,7 +2,7 @@ from typing import Any
 
 import uvicorn
 
-from config.settings.abstract_web_server import AbstractWebServer
+from config.settings.webserver.abstract_web_server import AbstractWebServer
 
 
 class FastAPIWebServer(AbstractWebServer):
