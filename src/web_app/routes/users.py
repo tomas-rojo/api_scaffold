@@ -3,22 +3,22 @@ from flask import Blueprint
 bp = Blueprint("users", __name__)
 
 
-@bp.post("/users")
+@bp.post("/")
 def user():
     return "Added user with ID: "
 
 
-@bp.get("/users/<str:id>")
+@bp.get("/<string:id>")
 def get_user():
     return "user from Blueprint!"
 
 
-@bp.put("/users/<str:id>")
+@bp.put("/<string:id>")
 def updated_user():
     return "user from Blueprint!"
 
 
-@bp.delete("/users/<str:id>")
+@bp.delete("/<string:id>")
 def delete_user():
     return "user from Blueprint!"
 
@@ -28,21 +28,21 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-# @router.post("/users")
+# @router.post("/")
 # def user(email: str):
 #     return "Added user with ID: "
 
 
-@router.get("/users/{id}")
-def get_user(id: str):
-    return "user from Blueprint!"
+# @router.get("/{id}")
+# def get_user(id: str):
+#     return "user from Blueprint!"
 
 
-# @router.put("/users/{id}")
+# @router.put("/{id}")
 # def updated_user(id: str):
 #     return "user from Blueprint!"
 
 
-# @router.delete("/users/{id}")
+# @router.delete("/{id}")
 # def delete_user(id: str):
 #     return "user from Blueprint!"
