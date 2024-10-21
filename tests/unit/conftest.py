@@ -7,6 +7,7 @@ from config.environment import Environment
 from pytest import fixture
 from starlette.testclient import TestClient
 from web_app.api import api
+from web_app.app import app
 
 
 @fixture(autouse=True)
@@ -20,6 +21,6 @@ def setup() -> Generator[None, None, None]:
 def client() -> TestClient:
     return TestClient(api)
 
-# @fixture
-# def flask_client() -> FlaskClient:
-#     return app.test_client()
+@fixture
+def flask_client() -> FlaskClient:
+    return app.test_client()
