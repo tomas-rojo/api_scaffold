@@ -9,7 +9,7 @@ from use_cases.get_index import IndexUseCase
 from web_app.routes import users
 
 api = FastAPI(title="Test")
-api.include_router(users.router)
+api.include_router(users.router, prefix="/users")
 
 # @api.get("/")
 # def main() -> dict[str, str]:
