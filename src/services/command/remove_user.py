@@ -2,6 +2,6 @@ from config.dependency import Dependency
 from ports.abstract_repository import AbstractRepository
 
 
-def get_element(id: str) -> str:
+def remove_user(id: str) -> None:
     repository = Dependency.get(AbstractRepository)
-    return repository.get(id)
+    repository.remove(id)

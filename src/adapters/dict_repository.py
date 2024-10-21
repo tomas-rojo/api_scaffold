@@ -1,16 +1,23 @@
-from exceptions.item_not_found import ItemNotFound
+from exceptions.user_not_found import UserNotFound
+from models.user import User
 from ports.abstract_repository import AbstractRepository
 
 
 class DictRepository(AbstractRepository):
     def __init__(self) -> None:
-        self._collection: dict[str, str] = {}
+        self._users: dict[str, User] = {}
 
-    def add(self, id: str) -> None:
-        self._collection[id] = id
+    def add(self, user: User) -> None:
+        self._users[user.id] = user
 
     def get(self, id: str) -> str:
         try:
-            return self._collection[id]
+            return self._users[id]
         except KeyError as e:
-            raise ItemNotFound(id) from e
+            raise UserNotFound(id) from e
+
+    def remove(self, id: str) -> str:
+        try:
+            del self._users[id]
+        except KeyError as e:
+            raise UserNotFound(id) from e

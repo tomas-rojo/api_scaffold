@@ -1,11 +1,17 @@
 from abc import ABC, abstractmethod
 
+from models.user import User
+
 
 class AbstractRepository(ABC):
     @abstractmethod
-    def add(self, id: str) -> None:
+    def add(self, user: User) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, id: str) -> str:
+    def get(self, user_id: str) -> str:
+        raise NotImplementedError
+
+    @abstractmethod
+    def remove(self, user_id: str) -> str:
         raise NotImplementedError

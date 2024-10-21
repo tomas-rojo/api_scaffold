@@ -9,7 +9,6 @@ from config.settings.postgres_settings import PostgresSettings
 
 class DevelopmentConfig(BaseConfig):
     def __init__(self) -> None:
-        Dependency.add_singleton("api_url", "integration.example.org")
         Dependency.add_singleton_factory(AbstractRepository, lambda: SQLRepository(self.engine))
 
     @property

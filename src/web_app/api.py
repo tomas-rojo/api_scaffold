@@ -4,7 +4,7 @@ from random import randrange
 from fastapi import FastAPI
 from models.user import User
 from services.command.add import add_element
-from use_cases.get_index import IndexUseCase
+from use_cases.get_user import GetUserUseCase
 
 from web_app.routes import users
 

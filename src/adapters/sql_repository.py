@@ -2,7 +2,7 @@ import uuid
 from contextlib import AbstractContextManager
 
 import sqlalchemy
-from exceptions.item_not_found import ItemNotFound
+from exceptions.user_not_found import UserNotFound
 from models.user import User
 from ports.abstract_repository import AbstractRepository
 from sqlalchemy import Boolean, String, text
@@ -56,3 +56,7 @@ class SQLRepository(AbstractRepository):
             if not user:
                 raise ValueError(f"User with ID: {user_id!r} not found")
             return user
+
+    def remove(self, user_id: str) -> None:
+        with self.autocommit_session as session:
+            session.delete(DbUser, user_id)

@@ -1,20 +1,24 @@
 from dataclasses import dataclass
 
 from exceptions.user_not_found import UserNotFound
+
+from services.command.remove_user import remove_user
 from services.query.get_user import get_user
-from shared.use_cases import QueryUseCase, UseCaseException
+from shared.use_cases import CommandUseCase, UseCaseException
 
 
 @dataclass
-class GetUserUseCase(QueryUseCase[str]):
+class RemoveUserUseCase(CommandUseCase):
     user_id: str
 
     class NotFound(UseCaseException):
         message_fmt = "No user found with ID {user_id}"
         error_code = 404
 
-    def _execute(self) -> str:
+    def _execute(self) -> None:
         try:
-            return get_user(id=self.user_id)
+            get_user(id=self.user_id)
+            remove_user(self.user_id)
         except UserNotFound:
             raise self.NotFound(user_id=self.user_id) from None
+
