@@ -58,11 +58,11 @@ mypy:
 	mypy src/ tests/
 
 run:
-	@export APP_ENVIRONMENT=development && bin/testctl run
+	@export APP_ENVIRONMENT=production && bin/testctl run
 
 config:
 	@export APP_ENVIRONMENT=development && bin/testctl config
 
 
 migrations:
-	@bin/generate_migrations
+	@export APP_ENVIRONMENT=production && bin/generate_migrations

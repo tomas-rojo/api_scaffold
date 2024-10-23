@@ -2,6 +2,7 @@ import uuid
 from contextlib import AbstractContextManager
 
 import sqlalchemy
+from exceptions.invalid_user_id import InvalidUserId
 from exceptions.user_not_found import UserNotFound
 from models.user import User
 from ports.abstract_repository import AbstractRepository
@@ -27,12 +28,12 @@ class SQLRepository(AbstractRepository):
         self._sessionmaker = sessionmaker(engine)
 
     def create_schema(self) -> None:
-        if self._engine.url.drivername != "sqlite":
+        if self._engine.dialect.name != "sqlite":
             raise RuntimeError("create_schema() is only allowed for sqlite connections")
         Base.metadata.create_all(bind=self._engine)
 
     def drop_schema(self) -> None:
-        if self._engine.url.drivername != "sqlite":
+        if self._engine.dialect.name != "sqlite":
             raise RuntimeError("drop_schema() is only allowed for sqlite connections")
         Base.metadata.drop_all(bind=self._engine)
 
@@ -52,10 +53,16 @@ class SQLRepository(AbstractRepository):
 
     def get(self, user_id: str) -> User:
         with self.no_autocommit_session as session:
-            user = session.get(DbUser, user_id)
+            try:
+                uuid_user_id = uuid.UUID(user_id)
+            except ValueError:
+                raise InvalidUserId(user_id) from None
+            user = session.get(DbUser, uuid_user_id)
             if not user:
-                raise ValueError(f"User with ID: {user_id!r} not found")
-            return user
+                raise ValueError(f"User not found")
+            return User(email=user.email,
+                        is_active=user.is_active,
+                        id=user.id)
 
     def remove(self, user_id: str) -> None:
         with self.autocommit_session as session:

@@ -10,13 +10,13 @@ class DictRepository(AbstractRepository):
     def add(self, user: User) -> None:
         self._users[user.id] = user
 
-    def get(self, id: str) -> str:
+    def get(self, id: str) -> User:
         try:
             return self._users[id]
         except KeyError as e:
             raise UserNotFound(id) from e
 
-    def remove(self, id: str) -> str:
+    def remove(self, id: str) -> None:
         try:
             del self._users[id]
         except KeyError as e:

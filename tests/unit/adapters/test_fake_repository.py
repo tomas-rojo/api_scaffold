@@ -10,6 +10,10 @@ def test_config_repo_2(repository: AbstractRepository, user: User) -> None:
     assert user == result
 
 
-def test_repository_raises_exception_when_user_not_found(repository: AbstractRepository) -> None:
+def test_repository_get_user_raises_exception_when_user_not_found(repository: AbstractRepository) -> None:
     with pytest.raises(UserNotFound):
         repository.get("invalid-id")
+
+def test_repository_remove_user_raises_exception_when_user_not_found(repository: AbstractRepository) -> None:
+    with pytest.raises(UserNotFound):
+        repository.remove("invalid-id")

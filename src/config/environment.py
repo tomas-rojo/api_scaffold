@@ -14,6 +14,7 @@ class Environment:
         "unit-test": UnitTestConfig,
         "integration": IntegrationTestConfig,
         "development": DevelopmentConfig,
+        "production": ProductionConfig
     }
 
     @staticmethod

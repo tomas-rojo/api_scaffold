@@ -9,9 +9,9 @@ class AbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def get(self, user_id: str) -> str:
+    def get(self, user_id: str) -> User:
         raise NotImplementedError
 
     @abstractmethod
-    def remove(self, user_id: str) -> str:
+    def remove(self, user_id: str) -> None:
         raise NotImplementedError
