@@ -1,3 +1,4 @@
+from typing import Any
 from flask import Flask
 from gunicorn.app.base import BaseApplication
 from web_app.bootstrap import app
@@ -6,8 +7,8 @@ from config.settings.webserver.abstract_web_server import AbstractWebServer
 
 
 class GunicornWebServer(AbstractWebServer):
-    class FlaskApplication(BaseApplication):
-        def __init__(self, app: Flask, options: dict[str, str]) -> None:
+    class FlaskApplication(BaseApplication):  # type: ignore
+        def __init__(self, app: Flask, options: dict[str, Any]) -> None:
             self.app = app
             self.options = options
             super().__init__()

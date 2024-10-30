@@ -19,7 +19,6 @@ class GetUserUseCase(QueryUseCase[User]):
         message_fmt = "User ID: {user_id} is invalid"
         error_code = 404
 
-
     def _execute(self) -> User:
         try:
             return get_user(id=self.user_id)

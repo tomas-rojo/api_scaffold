@@ -15,4 +15,3 @@ class AddUserUseCase(CommandUseCase):
 
     def _execute(self) -> None:
         add_user(self.user)
-

@@ -59,11 +59,13 @@ class SQLRepository(AbstractRepository):
                 raise InvalidUserId(user_id) from None
             user = session.get(DbUser, uuid_user_id)
             if not user:
-                raise ValueError(f"User not found")
-            return User(email=user.email,
-                        is_active=user.is_active,
-                        id=user.id)
+                raise UserNotFound(user_id) from None
+            return User(email=user.email, is_active=user.is_active, id=user.id)
 
     def remove(self, user_id: str) -> None:
+        try:
+            uuid_user_id = uuid.UUID(user_id)
+        except ValueError:
+            raise InvalidUserId(user_id) from None
         with self.autocommit_session as session:
-            session.delete(DbUser, user_id)
+            session.delete(uuid_user_id)

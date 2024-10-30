@@ -1,3 +1,2 @@
-
 class BaseConfig:
     pass

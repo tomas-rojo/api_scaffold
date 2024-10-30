@@ -11,7 +11,4 @@ class ProductionConfig(BaseConfig):
 
     @property
     def engine(self) -> Engine:
-        return create_engine('sqlite:///users.db',
-                             echo=True,
-                             connect_args={'check_same_thread':False},
-                             poolclass=StaticPool)
+        return create_engine("sqlite:///users.db", connect_args={"check_same_thread": False}, poolclass=StaticPool)

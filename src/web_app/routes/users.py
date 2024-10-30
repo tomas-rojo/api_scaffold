@@ -1,12 +1,13 @@
 from dataclasses import asdict
 from random import randrange
-from flask import Blueprint, jsonify
+from flask import Blueprint, Response, jsonify
 
 from models.user import User
 from use_cases.add_user import AddUserUseCase
 from use_cases.get_user import GetUserUseCase
 
 bp = Blueprint("users", __name__)
+
 
 def get_random_value() -> int:
     return randrange(1000)
@@ -15,15 +16,16 @@ def get_random_value() -> int:
 def do_email() -> str:
     return f"{get_random_value()}@gmail.com"
 
+
 @bp.get("/")
-def user():
+def user() -> Response:
     user = User(email=do_email())
     AddUserUseCase(user).execute()
-    return f"Added user with ID: {user.id.hex}"
+    return Response(response=f"Added user with ID: {user.id.hex}", status=201)
 
 
 @bp.get("/<string:id>")
-def get_user(id: str):
+def get_user(id: str) -> Response:
     user = GetUserUseCase(user_id=id).execute()
     user_as_dict = asdict(user)
     print(asdict(user))
@@ -31,13 +33,13 @@ def get_user(id: str):
 
 
 @bp.put("/<string:id>")
-def updated_user():
-    return "user from Blueprint!"
+def updated_user() -> Response:
+    return Response("user from Blueprint!", status=200)
 
 
 @bp.delete("/<string:id>")
-def delete_user():
-    return "user from Blueprint!"
+def delete_user() -> Response:
+    return Response("user from Blueprint!", status=200)
 
 
 from fastapi import APIRouter
