@@ -2,11 +2,13 @@ import uuid
 from contextlib import AbstractContextManager
 
 import sqlalchemy
+import sqlalchemy.exc
 from exceptions.invalid_user_id import InvalidUserId
+from exceptions.user_email_already_exists import EmailAlreadyExists
 from exceptions.user_not_found import UserNotFound
 from models.user import User
 from ports.abstract_repository import AbstractRepository
-from sqlalchemy import Boolean, String, text
+from sqlalchemy import Boolean, String
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, sessionmaker
 
@@ -47,9 +49,14 @@ class SQLRepository(AbstractRepository):
         return Session(self._engine)
 
     def add(self, user: User) -> None:
-        with self.autocommit_session as session:
-            db_user = DbUser(id=user.id, email=user.email, is_active=user.is_active)
-            session.add(db_user)
+        try:
+            with self.autocommit_session as session:
+                db_user = DbUser(id=user.id, email=user.email, is_active=user.is_active)
+                session.add(db_user)
+        except sqlalchemy.exc.IntegrityError as e:
+            if "email" in str(e.orig):
+                raise EmailAlreadyExists(user.email) from None
+            raise Exception  # raise broad exception on purpose
 
     def get(self, user_id: str) -> User:
         with self.no_autocommit_session as session:

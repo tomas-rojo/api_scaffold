@@ -3,6 +3,7 @@ from random import randrange
 from flask import Blueprint, Response, jsonify
 
 from models.user import User
+from shared.use_cases import UseCaseException
 from use_cases.add_user import AddUserUseCase
 from use_cases.get_user import GetUserUseCase
 
@@ -20,8 +21,11 @@ def do_email() -> str:
 @bp.get("/")
 def user() -> Response:
     user = User(email=do_email())
-    AddUserUseCase(user).execute()
-    return Response(response=f"Added user with ID: {user.id.hex}", status=201)
+    try:
+        AddUserUseCase(user).execute()
+        return Response(response=f"Added user with ID: {user.id.hex}", status=201)
+    except UseCaseException as e:
+        return Response(response=e.message, status=e.error_code)
 
 
 @bp.get("/<string:id>")
