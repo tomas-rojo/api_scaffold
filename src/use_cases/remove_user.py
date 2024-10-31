@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from exceptions.invalid_user_id import InvalidUserId
 from exceptions.user_not_found import UserNotFound
-
 from services.command.remove_user import remove_user
 from services.query.get_user import get_user
 from shared.use_cases import CommandUseCase, UseCaseException

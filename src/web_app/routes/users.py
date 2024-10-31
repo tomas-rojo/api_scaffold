@@ -1,7 +1,7 @@
 from dataclasses import asdict
 from random import randrange
-from flask import Blueprint, Response, jsonify
 
+from flask import Blueprint, Response, jsonify
 from models.user import User
 from shared.use_cases import UseCaseException
 from use_cases.add_user import AddUserUseCase

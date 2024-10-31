@@ -1,10 +1,10 @@
 import sys
+
 from adapters.sql_repository import Base, SQLRepository
 from config.dependency import Dependency
 from config.environment import Environment
 from ports.abstract_repository import AbstractRepository
 from shared.alembic import AlembicEnv
-
 
 try:
     Environment.bootstrap()

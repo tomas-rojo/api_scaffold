@@ -1,4 +1,5 @@
 from typing import Any
+
 from flask import Flask
 from gunicorn.app.base import BaseApplication
 from web_app.bootstrap import app

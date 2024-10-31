@@ -1,8 +1,9 @@
-from sqlalchemy import Engine, StaticPool, create_engine
 from adapters.sql_repository import SQLRepository
+from ports.abstract_repository import AbstractRepository
+from sqlalchemy import Engine, StaticPool, create_engine
+
 from config.dependency import Dependency
 from config.instances.base_config import BaseConfig
-from ports.abstract_repository import AbstractRepository
 
 
 class ProductionConfig(BaseConfig):

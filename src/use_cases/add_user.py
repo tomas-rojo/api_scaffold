@@ -23,4 +23,3 @@ class AddUserUseCase(CommandUseCase):
             add_user(self.user)
         except EmailAlreadyExists:
             raise self.UserEmailAlreadyExists(user_email=self.user.email) from None
-    
