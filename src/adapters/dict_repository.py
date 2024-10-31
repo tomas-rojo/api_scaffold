@@ -1,6 +1,6 @@
-from uuid import UUID
 import uuid
-from exceptions.invalid_user_id import InvalidUserId
+from uuid import UUID
+
 from exceptions.user_not_found import UserNotFound
 from models.user import User
 from ports.abstract_repository import AbstractRepository
@@ -13,22 +13,14 @@ class DictRepository(AbstractRepository):
     def add(self, user: User) -> None:
         self._users[user.id] = user
 
-    def get(self, id: str) -> User:
+    def _get(self, id: uuid.UUID) -> User:
         try:
-            uuid_user_id = uuid.UUID(id)
-        except ValueError:
-            raise InvalidUserId(id) from None
-        try:
-            return self._users[uuid_user_id]
+            return self._users[id]
         except KeyError as e:
-            raise UserNotFound(id) from e
+            raise UserNotFound(id.hex) from e
 
-    def remove(self, id: str) -> None:
+    def _remove(self, id: uuid.UUID) -> None:
         try:
-            uuid_user_id = uuid.UUID(id)
-        except ValueError:
-            raise InvalidUserId(id) from None
-        try:
-            del self._users[uuid_user_id]
+            del self._users[id]
         except KeyError as e:
-            raise UserNotFound(id) from e
+            raise UserNotFound(id.hex) from e

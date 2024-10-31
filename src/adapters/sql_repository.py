@@ -3,7 +3,6 @@ from contextlib import AbstractContextManager
 
 import sqlalchemy
 import sqlalchemy.exc
-from exceptions.invalid_user_id import InvalidUserId
 from exceptions.user_email_already_exists import EmailAlreadyExists
 from exceptions.user_not_found import UserNotFound
 from models.user import User
@@ -58,21 +57,16 @@ class SQLRepository(AbstractRepository):
                 raise EmailAlreadyExists(user.email) from None
             raise Exception  # raise broad exception on purpose
 
-    def get(self, user_id: str) -> User:
+    def _get(self, user_id: uuid.UUID) -> User:
         with self.no_autocommit_session as session:
-            try:
-                uuid_user_id = uuid.UUID(user_id)
-            except ValueError:
-                raise InvalidUserId(user_id) from None
-            user = session.get(DbUser, uuid_user_id)
+            user = session.get(DbUser, user_id)
             if not user:
-                raise UserNotFound(user_id) from None
+                raise UserNotFound(user_id.hex) from None
             return User(email=user.email, is_active=user.is_active, id=user.id)
 
-    def remove(self, user_id: str) -> None:
-        try:
-            uuid_user_id = uuid.UUID(user_id)
-        except ValueError:
-            raise InvalidUserId(user_id) from None
+    def _remove(self, user_id: uuid.UUID) -> None:
         with self.autocommit_session as session:
-            session.delete(uuid_user_id)
+            user = session.get(DbUser, user_id)  # Fetch the DbUser instance
+            if user is None:
+                raise UserNotFound(f"User with ID {user_id} not found")
+            session.delete(user)
