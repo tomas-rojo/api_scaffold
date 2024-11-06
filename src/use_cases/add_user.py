@@ -10,10 +10,6 @@ from shared.use_cases import CommandUseCase, UseCaseException
 class AddUserUseCase(CommandUseCase):
     user: User
 
-    class NotFound(UseCaseException):
-        message_fmt = "No user found with ID {user}"
-        error_code = 404
-
     class UserEmailAlreadyExists(UseCaseException):
         message_fmt = "User email {user_email} already exists"
         error_code = 404
