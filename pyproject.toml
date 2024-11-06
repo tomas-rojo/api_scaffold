@@ -31,6 +31,7 @@ addopts = "--tb=short -q"
 relative_files = true
 source = [ "src/" ]
 omit = [
+    "src/cli_app/**",
     "src/**/env.py",
     "src/**/versions/**",
 ]

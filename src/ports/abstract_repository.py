@@ -31,3 +31,7 @@ class AbstractRepository(ABC):
     @abstractmethod
     def _remove(self, user_uuid: UUID) -> None:
         raise NotImplementedError
+
+    @abstractmethod
+    def update(self, user: User) -> None:
+        raise NotImplementedError

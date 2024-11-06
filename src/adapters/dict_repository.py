@@ -24,3 +24,7 @@ class DictRepository(AbstractRepository):
             del self._users[id]
         except KeyError as e:
             raise UserNotFound(id.hex) from e
+
+    def update(self, user: User) -> None:
+        _user = self._get(user.id)
+        self._users[user.id] = _user

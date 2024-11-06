@@ -13,4 +13,4 @@ class IntegrationTestConfig(BaseConfig):
 
     @property
     def engine(self) -> Engine:
-        return create_engine("sqlite://", poolclass=StaticPool)
+        return create_engine("sqlite://", poolclass=StaticPool, connect_args={"check_same_thread": False})

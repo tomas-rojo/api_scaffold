@@ -70,3 +70,15 @@ class SQLRepository(AbstractRepository):
             if user is None:
                 raise UserNotFound(f"User with ID {user_id} not found")
             session.delete(user)
+
+    def update(self, user: User) -> None:
+        try:
+            with self.autocommit_session as session:
+                _user = session.get(DbUser, user.id)
+                if not _user:
+                    raise UserNotFound(f"User with ID {user.id} not found")
+                _user.email = user.email
+                _user.is_active = user.is_active
+        except sqlalchemy.exc.IntegrityError as e:
+            if "email" in str(e.orig):
+                raise EmailAlreadyExists(user.email) from None

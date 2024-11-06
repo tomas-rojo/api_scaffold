@@ -54,7 +54,7 @@ def run_web_server() -> None:
 
     try:
         web_server_process.wait()  # Block and wait for the subprocess to finish
-    except Exception as e:  # noqa
+    except Exception as e:  # noqa (broad catch on purpose)
         print(f"Exception occurred: {e}")
     finally:
         terminate_process(web_server_process)
@@ -89,6 +89,8 @@ def main() -> None:
     try:
         Environment.bootstrap()
         cli(prog_name=PROG_NAME)
-    except Exception as e:  # noqa
+    except Exception as e:  # noqa (broad catch on purpose)
         print(f"Unable to bootstrap environment: {str(e)}", file=sys.stderr)
         sys.exit(1)
+    finally:
+        Environment.teardown()

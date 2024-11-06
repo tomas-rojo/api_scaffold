@@ -28,7 +28,7 @@ class AbstractUseCase(ABC, Generic[TUseCaseResult]):
                 f"Use case exception occurred: [{e.__class__.__name__}] {e.message} (error code: {e.error_code})"
             )
             raise e
-        except Exception as e:
+        except Exception as e:  # noqa (broad catch on purpose)
             self.log.warning(f"Unhandled exception in use case: [{e.__class__.__name__}] {e}")
             raise UnhandledException(e=e) from e
 

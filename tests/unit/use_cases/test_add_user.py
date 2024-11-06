@@ -9,6 +9,6 @@ def test_can_add_user(user: User) -> None:
     AddUserUseCase(user).execute()
     assert get_user(user.id.hex) == user
 
-def test_get_user_raise_exception_if_userr_not_found() -> None:
+def test_get_user_raise_exception_if_user_not_found() -> None:
     with pytest.raises(GetUserUseCase.NotFound):
         GetUserUseCase("3c9c40e2b2ed4f64a675178465a7c28a").execute()

@@ -8,6 +8,9 @@ from config.settings.webserver.abstract_web_server import AbstractWebServer
 
 
 class GunicornWebServer(AbstractWebServer):
+    """A webserver implementation based on Gunicorn, to be used for production purposes."""
+
+    # Ignore type, because gunicorn does not have type hints currently.
     class FlaskApplication(BaseApplication):  # type: ignore
         def __init__(self, app: Flask, options: dict[str, Any]) -> None:
             self.app = app
