@@ -23,5 +23,4 @@ def test_repository_updates_user(repository: AbstractRepository, user: User) -> 
     repository.add(user)
     updated_user = User(id=user.id, email=user.email, is_active=False)
     repository.update(updated_user)
-    result = repository.get(updated_user.id.hex)
     assert updated_user.is_active is False

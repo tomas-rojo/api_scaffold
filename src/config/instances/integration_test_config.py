@@ -1,4 +1,3 @@
-from adapters.dict_repository import DictRepository
 from adapters.sql_repository import SQLRepository
 from ports.abstract_repository import AbstractRepository
 from sqlalchemy import Engine, StaticPool, create_engine
