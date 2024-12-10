@@ -21,4 +21,4 @@ jobs:
           make install
       - name: Test with pytest
         run: |
-          make alltest
+          make alltests
