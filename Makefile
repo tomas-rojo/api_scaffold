@@ -58,7 +58,7 @@ mypy:
 	mypy src/ tests/
 
 run:
-	@export APP_ENVIRONMENT=production && bin/testctl run
+	@export APP_ENVIRONMENT=development && bin/testctl run
 
 config:
 	@export APP_ENVIRONMENT=development && bin/testctl config
@@ -66,3 +66,7 @@ config:
 
 migrations:
 	@export APP_ENVIRONMENT=production && bin/generate_migrations
+
+install:
+	@pip install -r requirements/requirements.txt
+	@pip install -r requirements/requirements-dev.txt
